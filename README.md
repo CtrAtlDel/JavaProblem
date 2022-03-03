@@ -1,2 +1,1 @@
-# Java2022
-This repo for results in Java lang programming .
+Thi is repo for Java tasks .
