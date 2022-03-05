@@ -11,6 +11,5 @@ public class FrameWork extends JFrame {
         this.pack();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-
     }
 }

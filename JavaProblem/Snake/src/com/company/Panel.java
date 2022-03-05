@@ -9,6 +9,8 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 
 public class Panel extends JPanel implements ActionListener {
+
+
     static final int SCREEN_WEIGHT = 600;
     static final int SCREEN_HEIGHT = 600;
     static final int UNIT_SIZE = 25;
