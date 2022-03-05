@@ -7,7 +7,6 @@ public class Person {
     private Optional<String> firstName;
     private Optional<String> lastName;
     private Optional<Integer> age;
-
     public void setFirstName(String firstName) {
         this.firstName = Optional.ofNullable(firstName);
     }

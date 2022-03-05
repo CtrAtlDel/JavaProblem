@@ -8,6 +8,8 @@ public class Main {
         Optional<Person> otherPerson = Optional.of(new Person());
         var optionalNotNull = Optional.of(new Person());
         Optional<Person> maybeNullPerson = Optional.ofNullable(null);
+        var person = somePerson.orElse(new Person()); // = somePerson or new Person
+//        Person personException = otherPerson.orElseThrow(Exception::new);
 
     }
 }
