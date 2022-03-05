@@ -2,3 +2,5 @@
 .iml
 .txt
 ./*.DS_Store
+.idea
+*.DS_Store
