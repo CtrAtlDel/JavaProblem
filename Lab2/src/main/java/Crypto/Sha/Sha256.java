@@ -1,16 +1,20 @@
-package Crypto;
+package Crypto.Sha;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public final class ShaManager {
-    public static byte[] getShaByString(String original) throws NoSuchAlgorithmException { // string -> byte
+class Sha256 {
+    protected static byte[] getShaByString(String original) throws NoSuchAlgorithmException { // string -> byte
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        return digest.digest(original.getBytes(StandardCharsets.UTF_8));
+        return digest.digest(original.getBytes());
     }
 
-    public static String getShaByByte(byte[] hash) {
+    protected static String getShaByByte(String original) throws NoSuchAlgorithmException {
+        return byteToString(getShaByString(original));
+    }
+
+    protected static String byteToString(byte[] hash) {
         StringBuilder hexString = new StringBuilder(2 * hash.length);
         for (byte b : hash) {
             String hex = Integer.toHexString(0xff & b);
