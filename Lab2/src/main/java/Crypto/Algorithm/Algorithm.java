@@ -10,18 +10,23 @@ import java.util.Random;
 public class Algorithm {
     public static void AlgorithmHB(int size, byte[] firstArray) throws Exception {
         if (size < Const.MinSha || size > Const.MaxSha) throw new Exception("Size < 0 or Size > 20");
-        var shaXX = new ShaXX(size);
 
-        var map = new HashMap<byte[],byte[]>();
+        var shaXX = new ShaXX(size);
+        var map = new HashMap<byte[], byte[]>();
+        int counterCollision = 0;
+
         map.put(firstArray, shaXX.getHash(firstArray));
 
-        while(true){
+        while (true) {
             var x = byteGenerator(size + 1); // generate random byte array with size
             var hashX = shaXX.getHash(x);
 
-            if (!map.containsKey(x)){
-                if (map.containsValue(hashX)){
-
+            if (!map.containsKey(x)) {
+                if (!map.containsValue(hashX)) {
+                    map.put(x, hashX);
+                }else{
+                    // counter++
+//                    return record with 2 (firstarray, secondArray)
                 }
             }
 
@@ -29,15 +34,19 @@ public class Algorithm {
 
     }
 
-    private boolean isEqual(byte[] first, byte[] last){
-        return Arrays.equals(first,last);
+    private boolean isEqual(byte[] first, byte[] last) {
+        return Arrays.equals(first, last);
     }
 
-    public static byte[] byteGenerator(int size) throws Exception{
+    public static byte[] byteGenerator(int size) throws Exception {
         if (size <= 0) throw new Exception("Size < 0");
+
         var byteArray = new byte[size];
         new Random().nextBytes(byteArray);
         return byteArray;
+    }
+
+    record Pair(byte[] first, byte[] last) {
     }
 }
 
