@@ -1,16 +1,15 @@
 package Crypto.Sha;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 class Sha256 {
-    protected static byte[] getShaByString(String original) throws NoSuchAlgorithmException { // string -> byte
+    protected static byte[] getShaByString(String original) throws Exception { // string -> byte
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         return digest.digest(original.getBytes());
     }
 
-    protected static String getShaByByte(String original) throws NoSuchAlgorithmException {
+    protected static String getShaByByte(String original) throws Exception {
         return byteToString(getShaByString(original));
     }
 
