@@ -3,33 +3,33 @@ package Crypto.Algorithm;
 import Crypto.Const.Const;
 import Crypto.Sha.ShaXX;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Random;
+import java.nio.ByteBuffer;
+import java.util.*;
 
 public class Algorithm {
     public static void AlgorithmHB(int size, byte[] firstArray) throws Exception {
         if (size < Const.MinSha || size > Const.MaxSha) throw new Exception("Size < 0 or Size > 20");
 
         var shaXX = new ShaXX(size);
-        var map = new HashMap<byte[], byte[]>();
+        Comparator<byte[]> pcomp = new fixedComparator();
+        var map = new TreeMap<byte[], byte[]>(pcomp);
         int counterCollision = 0;
-
+        var hashArray = shaXX.getHash(firstArray);
+        System.out.println("X-> " + firstArray + " hashX-> " + hashArray);
         map.put(firstArray, shaXX.getHash(firstArray));
 
         while (true) {
-            var x = byteGenerator(size + 1); // generate random byte array with size
+            var x = byteGenerator(size + 5); // generate random byte array with size
             var hashX = shaXX.getHash(x);
 
-            if (!map.containsKey(x)) {
+            if (!map.containsKey(x) ){
                 if (!map.containsValue(hashX)) {
                     map.put(x, hashX);
-                }else{
-                    // counter++
-//                    return record with 2 (firstarray, secondArray)
+                } else {
+                    counterCollision++;
+                    System.out.println("Collision:" + ByteBuffer.wrap(hashX).getInt() + " X: " + ByteBuffer.wrap(x).getInt());
                 }
             }
-
         }
 
     }
