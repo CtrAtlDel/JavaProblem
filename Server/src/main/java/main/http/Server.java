@@ -17,7 +17,8 @@ public class Server {
         try(var server = new ServerSocket(this.port)){
             while(true){
                 var socket = server.accept();
-//                var thread =
+                var thread = new Handler(socket, this.directory);
+                thread.start();
             }
         }catch(IOException e){
             e.printStackTrace();
