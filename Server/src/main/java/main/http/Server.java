@@ -13,16 +13,23 @@ public class Server {
         this.directory = directory;
     }
 
-    void start(){
-        try(var server = new ServerSocket(this.port)){
-            while(true){
+    void start() {
+        try (var server = new ServerSocket(this.port)) {
+            while (true) {
                 var socket = server.accept();
                 var thread = new Handler(socket, this.directory);
                 thread.start();
             }
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public static void main(String[] args) {
+        var port = Integer.parseInt(args[0]);
+        System.out.println(port);
+        var directory = args[1];
+        System.out.println(directory);
+        new Server(port, directory).start();
     }
 }

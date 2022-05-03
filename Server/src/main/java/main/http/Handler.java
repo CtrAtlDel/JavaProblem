@@ -31,29 +31,39 @@ public class Handler extends Thread {
     public void run() {
         try (var input = this.socket.getInputStream(); var output = this.socket.getOutputStream()) {
             var url = this.getRequestUrl(input);
-            var filePath = Path.of(this.directory + url);
-            if (Files.exists(filePath) && !Files.isDirectory(filePath)) { // Проверяем есть такой путь и директория ли это
-
-            } else { // иначе сообщение о том что не нашли
+            var filePath = Path.of(this.directory, url);
+            if (Files.exists(filePath) && !Files.isDirectory(filePath)) {
+                var extension = this.getFileExtension(filePath);
+                var type = CONTENT_TYPES.get(extension);
+                var fileBytes = Files.readAllBytes(filePath);
+                this.sendHeader(output, 200, "OK", type, fileBytes.length);
+                output.write(fileBytes);
+            } else {
                 var type = CONTENT_TYPES.get("text");
-                this.sendHeader(output, 404, "NOT FOUND", type, NOT_FOUND_MESSAGE.length()); //Порядок указан в спецификации
-                output.write(NOT_FOUND_MESSAGE.getBytes(StandardCharsets.UTF_8));
+                this.sendHeader(output, 404, "Not Found", type, NOT_FOUND_MESSAGE.length());
+                output.write(NOT_FOUND_MESSAGE.getBytes());
             }
-        } catch (IOException exception) {
-            exception.printStackTrace();
+        } catch(IOException e) {
+            e.printStackTrace();
         }
     }
 
     private String getRequestUrl(InputStream input) {
         var reader = new Scanner(input).useDelimiter("\r\n");
-        var line = reader.nextLine();
-        return line.split("")[1];
+        var line = reader.next();
+        return line.split(" ")[1];
     }
 
-    private void sendHeader(OutputStream output, int statusCode, String statusText, String type, long length) {
+    private String getFileExtension(Path path) {
+        var name = path.getFileName().toString();
+        var extensionStart = name.lastIndexOf(".");
+        return extensionStart == -1 ? "" : name.substring(extensionStart + 1);
+    }
+
+    private void sendHeader(OutputStream output, int statusCode, String statusText, String type, long lenght) {
         var ps = new PrintStream(output);
-        ps.printf("HTTP/1.1 %s %s%n", statusCode, statusText); //два переноса строки по спецификации HTTP 1
+        ps.printf("HTTP/1.1 %s %s%n", statusCode, statusText);
         ps.printf("Content-Type: %s%n", type);
-        ps.printf("Content-Length: %s%n%n", length);
+        ps.printf("Content-Length: %s%n%n", lenght);
     }
 }
