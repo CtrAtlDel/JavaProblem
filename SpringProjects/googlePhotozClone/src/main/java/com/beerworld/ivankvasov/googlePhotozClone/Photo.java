@@ -1,8 +1,12 @@
 package com.beerworld.ivankvasov.googlePhotozClone;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class Photo {
     private String id;
 
+    @NotEmpty
     private String fileName;
 
     public Photo() {}

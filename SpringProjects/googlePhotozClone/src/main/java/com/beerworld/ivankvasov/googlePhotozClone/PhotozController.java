@@ -4,13 +4,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.lang.module.ResolutionException;
-import java.util.*;
+import javax.validation.Valid;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 public class PhotozController {
-    private Map<String, Photo> db = new HashMap<>(){{
-       put("1", new Photo("1", "hello.jpg"));
+    private Map<String, Photo> db = new HashMap<>() {{
+        put("1", new Photo("1", "hello.jpg"));
     }};
 
     @GetMapping("/")
@@ -20,7 +23,7 @@ public class PhotozController {
 
     @GetMapping("/photoz") // return all photo
     public Collection<Photo> get() {
-        return  db.values();
+        return db.values();
     }
 
     @GetMapping("/photoz/{id}") // retrun photo by id
@@ -37,7 +40,7 @@ public class PhotozController {
     }
 
     @PostMapping("/photoz/")
-    public Photo create(Photo photo) {
+    public Photo create(@RequestBody @Valid Photo photo) { //we need requst body annotation^ because JSON need to convert JSIN
         //We shoul create id, because front end cannot create the id
         //We will use a long String
         photo.setId(UUID.randomUUID().toString());
