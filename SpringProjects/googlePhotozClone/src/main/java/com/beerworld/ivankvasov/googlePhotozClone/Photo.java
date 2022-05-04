@@ -1,6 +1,5 @@
 package com.beerworld.ivankvasov.googlePhotozClone;
 
-
 public class Photo {
     private String id;
 
