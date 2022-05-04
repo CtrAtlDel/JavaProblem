@@ -37,10 +37,11 @@ public class PhotozController {
     }
 
     @PostMapping("/photoz/")
-    public void create(Photo photo) {
+    public Photo create(Photo photo) {
         //We shoul create id, because front end cannot create the id
         //We will use a long String
         photo.setId(UUID.randomUUID().toString());
         db.put(photo.getId(), photo);
+        return photo;
     }
 }

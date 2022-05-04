@@ -1,6 +1,23 @@
 Чтобы удалить какой-то объект, нужно через меню разработчика использовать вот такую функцию:
+
 (async function deletePhoto(id) {
 await fetch("http://localhost:8080/photoz/" + id, {
 method: "DELETE"
 })
 })("5")
+
+------------ Post http
+(async function createPhoto() {
+          let photo = {"filename": "hello.jpg"};
+          await fetch("http://localhost:8080/photoz", {
+                    method: "POST",
+                    headers: {
+                              "Accept": "application/json",
+                              "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(photo)
+                    })
+                    .then(result => result.text())
+                    .then(text => alert(text));
+})();
+
