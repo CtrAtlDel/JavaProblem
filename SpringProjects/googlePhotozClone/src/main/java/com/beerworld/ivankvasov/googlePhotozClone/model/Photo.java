@@ -1,4 +1,4 @@
-package com.beerworld.ivankvasov.googlePhotozClone;
+package com.beerworld.ivankvasov.googlePhotozClone.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -12,6 +12,8 @@ public class Photo {
 
     @NotEmpty
     private String fileName;
+
+    private String contentType;
 
     public Photo() {
     }
@@ -47,4 +49,11 @@ public class Photo {
     }
 
 
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
 }
