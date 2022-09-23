@@ -1,5 +1,5 @@
 ## Patterns for programming
-This repository includes examples and pattern descriptions
+This repository includes examples and pattern descriptions:
  - Singleton
  - Builder
  - Observer
