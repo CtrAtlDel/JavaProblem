@@ -1,2 +1,4 @@
-package examples;public class ttr {
+package examples;
+
+public class ttr {
 }
