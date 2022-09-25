@@ -1,0 +1,17 @@
+// Command to generating protofile
+// python -m grpc_tools.protoc -Ipath_to_proto_file --python_out=. --grpc_python_out=. file.proto  
+syntax = "proto3";
+package com.example.grpc;
+/*In this format "=1" just a key, what we should use in this format*/
+message Request { // request for server
+  string name = 1;
+  repeated string hobbies = 2; // list of strings
+}
+
+message Response {
+  string greeting = 1;
+}
+
+service SimpleService {
+  rpc greeting(Request) returns (Response);
+}
