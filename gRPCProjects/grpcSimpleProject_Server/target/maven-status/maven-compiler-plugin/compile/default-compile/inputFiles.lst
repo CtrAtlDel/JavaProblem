@@ -1,0 +1,4 @@
+/Users/ivankvasov/gitJava/gRPCProjects/grpcSimpleProject_Server/src/main/java/org/example/App.java
+/Users/ivankvasov/gitJava/gRPCProjects/grpcSimpleProject_Server/src/main/java/org/example/SimpleServiceImpl.java
+/Users/ivankvasov/gitJava/gRPCProjects/grpcSimpleProject_Server/target/generated-sources/protobuf/java/com/example/grpc/GreatingService.java
+/Users/ivankvasov/gitJava/gRPCProjects/grpcSimpleProject_Server/target/generated-sources/protobuf/grpc-java/com/example/grpc/SimpleServiceGrpc.java
