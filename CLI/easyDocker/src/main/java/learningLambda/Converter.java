@@ -8,6 +8,14 @@ public interface Converter<T, N> {
     static <T> boolean isNotNull(T t) {
         return t != null;
     }
+//    Статический анализатор
+//    static {
+//
+//    }
+//
+//    {
+//        
+//    }
 
     // Можно использовать дефолтыне методы
     default void writeHi(){
