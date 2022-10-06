@@ -1,12 +1,10 @@
+import java.util.List;
+import java.util.Optional;
+
 public class Program {
     public static void main(String[] args) {
-        while (true) {
-            try {
-                Thread.sleep(500);
-                System.out.println("I am running...");
-            } catch (InterruptedException ex) {
-                System.out.println("Something went wrong...");
-            }
-        }
+        List<Optional<Long>> list;
+        Optional<List<Long>> list_opt;
+        System.out.println();
     }
 }
