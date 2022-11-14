@@ -1,4 +1,4 @@
-package com.example.kafkaexample;
+package com.example.kafkaMissMe;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
